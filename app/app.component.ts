@@ -1,28 +1,26 @@
-import {Component, OnInit} from '@angular/core';
+import { Component } from '@angular/core';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
 
-import { Pokemon } from './pokemon';
+import { PokemonsComponent } from './pokemons.component';
 import { PokemonService } from './pokemon.service';
 
 @Component({
     selector: 'my-app',
     templateUrl: 'app/app.component.html',
-    providers: [PokemonService]
+    directives: [ROUTER_DIRECTIVES],
+    providers: [
+      ROUTER_PROVIDERS,
+      PokemonService
+    ]
 })
-export class AppComponent implements OnInit{
-  pokemons: Pokemon[];
-  selectedPokemon: Pokemon;
-
-  constructor(private pokemonService: PokemonService) { }
-
-  getPokemons() {
-    this.pokemonService.getPokemons().then(pokemons => this.pokemons = pokemons)
+@RouteConfig([
+  {
+    path: '/pokemons',
+    name: 'Pokemons',
+    component: PokemonsComponent,
+    useAsDefault: true
   }
-
-  ngOnInit() {
-    this.getPokemons();
-  }
-
-  onSelect(pokemon: Pokemon) { this.selectedPokemon = pokemon; }
-
+])
+export class AppComponent {
+  title = 'Pokedex App';
  }
