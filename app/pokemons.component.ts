@@ -15,6 +15,7 @@ export class PokemonsComponent implements OnInit{
   constructor( private _router: Router, private pokemonService: PokemonService) { }
 
   getPokemons() {
+    console.log(this.pokemonService.getPokemons());
     this.pokemonService.getPokemons().then(pokemons => this.pokemons = pokemons)
   }
 
