@@ -28,7 +28,6 @@ export class PokemonsComponent implements OnInit{
   }
 
   onSelect(pokemon: Pokemon) {
-    console.log(pokemon);
     this.selectedPokemon = pokemon;
   }
 

@@ -6,11 +6,12 @@ import { Pokemon } from './pokemon';
 
 @Injectable()
 export class PokemonService {
-  private pokemonUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=51&offset=0';
+  private pokemonUrl = 'https://pokeapi.co/api/v2/pokemon/';
+  pokemon: Pokemon;
   constructor(private http: Http){}
 
   getPokemons(): Promise<Pokemon[]> {
-    return this.http.get(this.pokemonUrl)
+    return this.http.get(this.pokemonUrl + '?limit=51&offset=0')
     .toPromise()
     .then(response => response.json().results)
     .catch(this.handleError);
@@ -18,9 +19,16 @@ export class PokemonService {
   }
 
   getPokemon(name : string) {
-    //TODO HTTP service qui va récupérer les infos via l'API
-    return this.getPokemons()
-               .then(pokemons => pokemons.filter(pokemon => pokemon.name === name)[0]);
+    return this.http.get(this.pokemonUrl + name)
+    .toPromise()
+    .then(response => response.json())
+    .catch(this.handleError);
+    // console.log(this.getPokemons()
+    //            .then(pokemons => pokemons.filter(pokemon => pokemon.name === name)[0]).then(pokemon => this.pokemon === pokemon));
+    // console.log(this.pokemon);
+    // //TODO HTTP service qui va récupérer les infos via l'API
+    // return this.getPokemons()
+    //            .then(pokemons => pokemons.filter(pokemon => pokemon.name === name)[0]);
   }
 
   private handleError(error: any) {
