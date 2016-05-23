@@ -12,7 +12,7 @@ import { PokemonFilterPipe } from './pokemonFilter.pipe';
     pipes:[PokemonFilterPipe]
 })
 export class PokemonsComponent implements OnInit{
-  filterargs = {title: ''};
+  filterargs = '';
 
   pokemons: Pokemon[];
   selectedPokemon: Pokemon;
@@ -37,7 +37,7 @@ export class PokemonsComponent implements OnInit{
   }
 
   search(searchPokemon: string) {
-    this.filterargs = { title: searchPokemon };
+    this.filterargs = searchPokemon;
   }
 
  }
