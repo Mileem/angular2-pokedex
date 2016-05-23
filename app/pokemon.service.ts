@@ -11,7 +11,7 @@ export class PokemonService {
   constructor(private http: Http){}
 
   getPokemons(): Promise<Pokemon[]> {
-    return this.http.get(this.pokemonUrl + '?limit=51&offset=0')
+    return this.http.get(this.pokemonUrl + '?limit=811&offset=0')
     .toPromise()
     .then(response => response.json().results)
     .catch(this.handleError);

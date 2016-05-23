@@ -1,15 +1,31 @@
 <div *ngIf="pokemon">
   <h2>{{pokemon.name}} details!</h2>
-  <img *ngIf="pokemon.id < 10" src="http://assets.pokemon.com/assets/cms2/img/pokedex/full/00{{pokemon.id }}.png" alt="" />
-  <img *ngIf="pokemon.id >= 10 && pokemon.id < 100" src="http://assets.pokemon.com/assets/cms2/img/pokedex/full/0{{pokemon.id }}.png" alt="" />
+  <img src="{{pokemon.sprites.front_default}}" alt="" />
+  <img src="{{pokemon.sprites.back_default}}" alt="" />
   <div>
     <label>id: </label>{{pokemon.id}}</div>
   <div>
     <label>name: </label>
     <span>{{pokemon.name}}</span>
-   </div>
-   <div>
-     <label>Experience: </label>
-     <span>{{pokemon.base_experience}}</span>
-    </div>
+  </div>
+  <div>
+    <label>Weight: </label>
+    <span>{{pokemon.weight}}</span>
+  </div>
+  <div>
+    <label>Height: </label>
+    <span>{{pokemon.height}} dm</span>
+  </div>
+  <div>
+    <label>Experience: </label>
+    <span>{{pokemon.base_experience}}</span>
+  </div>
+  <div>
+    <label>Areas:  </label>
+    <ul>
+      <li *ngFor="let area of pokemon.location_area_encounters">
+      {{ area.location_area.name }}
+      </li>
+    </ul>
+  </div>
 </div>
