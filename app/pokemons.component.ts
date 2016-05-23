@@ -4,19 +4,23 @@ import { Router } from '@angular/router-deprecated';
 import { Pokemon } from './pokemon';
 import { PokemonService } from './pokemon.service';
 
+import { PokemonFilterPipe } from './pokemonFilter.pipe';
+
 @Component({
     selector: 'my-pokemons',
-    templateUrl: 'app/pokemons.component.html'
+    templateUrl: 'app/pokemons.component.html',
+    pipes:[PokemonFilterPipe]
 })
 export class PokemonsComponent implements OnInit{
+  filterargs = {title: ''};
+
   pokemons: Pokemon[];
   selectedPokemon: Pokemon;
 
   constructor( private _router: Router, private pokemonService: PokemonService) { }
 
   getPokemons() {
-    console.log(this.pokemonService.getPokemons());
-    this.pokemonService.getPokemons().then(pokemons => this.pokemons = pokemons)
+    this.pokemonService.getPokemons().then(pokemons => this.pokemons = pokemons);
   }
 
   ngOnInit() {
@@ -30,6 +34,10 @@ export class PokemonsComponent implements OnInit{
 
   gotoDetail(pokemon: Pokemon) {
     this._router.navigate(['PokemonDetail', { name: pokemon.name }]);
+  }
+
+  search(searchPokemon: string) {
+    this.filterargs = { title: searchPokemon };
   }
 
  }
