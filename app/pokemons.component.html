@@ -2,7 +2,7 @@
 <input #searchPokemon type="text" (keyup)="search(searchPokemon.value)">
 <p>{{values}}</p>
 <div *ngIf="pokemons">
-  <li *ngFor="let pokemon of pokemons | pokemonfilter:filterargs">
-    {{ pokemon.name }} <button (click)="gotoDetail(pokemon)">+ d'infos</button>
+  <li *ngFor="let pokemon of pokemons | pokemonfilter:filterargs | slice:0:10 ">
+      {{ pokemon.name }} <button (click)="gotoDetail(pokemon)">+ d'infos</button>
   </li>
 </div>
