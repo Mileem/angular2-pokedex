@@ -1,0 +1,10 @@
+<!-- <h2>{{pokemon.name}}</h2> -->
+<div *ngIf="pokemon">
+  <h2>{{pokemon.name}} details!</h2>
+  <div>
+    <label>url: </label>{{pokemon.url}}</div>
+  <div>
+    <label>name: </label>
+    <input [(ngModel)]="pokemon.name" placeholder="name" />
+   </div>
+</div>

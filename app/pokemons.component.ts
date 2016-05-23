@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router-deprecated';
 
 import { Pokemon } from './pokemon';
 import { PokemonService } from './pokemon.service';
@@ -11,7 +12,7 @@ export class PokemonsComponent implements OnInit{
   pokemons: Pokemon[];
   selectedPokemon: Pokemon;
 
-  constructor(private pokemonService: PokemonService) { }
+  constructor( private _router: Router, private pokemonService: PokemonService) { }
 
   getPokemons() {
     this.pokemonService.getPokemons().then(pokemons => this.pokemons = pokemons)
@@ -21,6 +22,13 @@ export class PokemonsComponent implements OnInit{
     this.getPokemons();
   }
 
-  onSelect(pokemon: Pokemon) { this.selectedPokemon = pokemon; }
+  onSelect(pokemon: Pokemon) {
+    console.log(pokemon);
+    this.selectedPokemon = pokemon;
+  }
+
+  gotoDetail(pokemon: Pokemon) {
+    this._router.navigate(['PokemonDetail', { name: pokemon.name }]);
+  }
 
  }
